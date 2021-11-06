@@ -7,8 +7,9 @@ Created on Sat Nov  6 17:06:36 2021
 
 import cv2
 import mediapipe as mp 
+import time 
 
-def HandleHandTracking(maxHandToModel):
+def HandleHandTracking(maxHandToModel, startTime, currentTime):
         cap = cv2.VideoCapture(0)
         
         mpHand = mp.solutions.hands
@@ -29,9 +30,13 @@ def HandleHandTracking(maxHandToModel):
                 for handLms in result.multi_hand_landmarks:
                     mpDraw.draw_landmarks(img, handLms, mpHand.HAND_CONNECTIONS)
             
+        
+            currentTime = time.time()
+            fps = 1/(currentTime-startTime)
+            startTime = currentTime
             
-            
-            
+            cv2.putText(img, str(int(fps)), (10,70), cv2.FONT_HERSHEY_PLAIN, 3, 
+                        (255, 0 , 255) , 3)
             
             cv2.imshow("Image", img)
             cv2.waitKey(1)
