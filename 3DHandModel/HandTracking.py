@@ -11,9 +11,14 @@ import mediapipe as mp
 def HandleHandTracking():
         cap = cv2.VideoCapture(0)
         
+        mpHand = mp.solutions.hands
+        hands = mpHand.Hands()
+        
         while True:
             
             success, img = cap.read()
+            imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+            result = hands.process(imgRGB)
             cv2.imshow("Image", img)
             cv2.waitKey(1)
         
