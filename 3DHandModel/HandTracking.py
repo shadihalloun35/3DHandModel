@@ -27,7 +27,7 @@ def HandleHandTracking(maxHandToModel):
             
             if result.multi_hand_landmarks:
                 for handLms in result.multi_hand_landmarks:
-                    mpDraw.draw_landmarks(img, handLms)
+                    mpDraw.draw_landmarks(img, handLms, mpHand.HAND_CONNECTIONS)
             
             
             
