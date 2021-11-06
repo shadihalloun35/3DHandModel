@@ -8,10 +8,13 @@ Created on Sat Nov  6 17:06:36 2021
 import cv2
 import mediapipe as mp 
 
-def HandleHandTracking():
+def HandleHandTracking(maxHandToModel):
         cap = cv2.VideoCapture(0)
         
         mpHand = mp.solutions.hands
+        
+        #hands = mpHand.Hands(False,maxHandToModel)
+        
         hands = mpHand.Hands()
         mpDraw = mp.solutions.drawing_utils
         while True:
@@ -20,7 +23,7 @@ def HandleHandTracking():
             imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
             result = hands.process(imgRGB)
             
-            #print(result.multi_hand_landmarks)
+            print(result.multi_hand_landmarks)
             
             if result.multi_hand_landmarks:
                 for handLms in result.multi_hand_landmarks:

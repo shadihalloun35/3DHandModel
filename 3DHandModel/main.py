@@ -10,8 +10,8 @@ import HandTracking
 
 if __name__=="__main__":
     
-
-    HandTracking.HandleHandTracking()
+    maxHandToModel = 2
+    HandTracking.HandleHandTracking(maxHandToModel)
     
     
     
