@@ -11,9 +11,6 @@ if __name__=="__main__":
     
     startTime = 0
     currentTime = 0
-    maxHandToModel = 2
+    maxHandToModel = 10
     HandTracking.HandleHandTracking(maxHandToModel, startTime, currentTime)
-    
-    
-    
     

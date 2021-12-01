@@ -11,23 +11,27 @@ import time
 
 def HandleHandTracking(maxHandToModel, startTime, currentTime):
         cap = cv2.VideoCapture(0)
-        
         mpHand = mp.solutions.hands
         
-        #hands = mpHand.Hands(False,maxHandToModel)
+        hands = mpHand.Hands(False, maxHandToModel)
         
-        hands = mpHand.Hands()
+        #hands = mpHand.Hands()
         mpDraw = mp.solutions.drawing_utils
+        
         while True:
-            
             success, img = cap.read()
             imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
             result = hands.process(imgRGB)
             
-            print(result.multi_hand_landmarks)
+            #print(result.multi_hand_landmarks)
             
             if result.multi_hand_landmarks:
                 for handLms in result.multi_hand_landmarks:
+                    for id, lm in enumerate(handLms.landmark):
+                        h, w, c = img.shape
+                        cx, cy, cz = int(lm.x*w), int(lm.y*h),int(lm.z*c)
+                        print(id, cx,cy,cz)
+                        
                     mpDraw.draw_landmarks(img, handLms, mpHand.HAND_CONNECTIONS)
             
         
